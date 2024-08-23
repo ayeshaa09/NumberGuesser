@@ -1,7 +1,6 @@
-
+max = 100000
+min = 0
 def NumberGuesser():
-    max = 100000
-    min = 0
     print('''    \nWelcome to the Number Guesser! If you
     choose to play, this game works by guessing
     the number you are thinking of by asking if
@@ -26,8 +25,6 @@ def NumberGuesser():
         
 
 def HigherOrLowerP():
-    max = 100000
-    min = 0
     HL = input("\nis your number higher, lower or equal to " + str(max//2) + " ?" + " [h/l/e]" + "\n")
     if HL == "h":
         min = max//2
@@ -54,8 +51,8 @@ def HigherOrLowerP():
             else: 
                 print("\nthat is not an option from the above\n")
                 continue
-            if min == 999:
-                min = 1000
+            if min == max - 1:
+                min = max
         elif HL == "l":
             HL3 = input("\nis your number higher, lower or equal to " + str((max - min)//2 + min) + " ?" + " [h/l/e]" + "\n")
             if HL3 == "h":
@@ -70,8 +67,6 @@ def HigherOrLowerP():
                 continue
 
 def HigherOrLowerS():
-    max = 100000
-    min = 0
     Number2 = input('''\nAlright! Think of any number between '''
     + str(min) + " - " + str(max) + ''' inclusive. 
     Type your number below.\n''') 
@@ -86,8 +81,8 @@ def HigherOrLowerS():
             min = (max + min)//2
         elif Number2 < (max - min)//2 + min:
             max = (max - min)//2 + min
-        if min == 999:
-            min = 1000
+        if min == max-1:
+            min = max
         elif Number2 == (max - min)//2 + min:
             print("\nyour number, " + str((max - min)//2 + min) + " was found in " + str(counter) + " tries.\n")
             break
