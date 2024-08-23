@@ -1,0 +1,6 @@
+"git status" tells you what files you changed
+"git add" to put files in a staging area
+    "git status" will tell you which files are in and are not in the staging area
+    "git commit -m " you can write in quotations whatever you want to let people 
+    know about the files u put in staging area
+    "git push" moves the files in the staging area to github
