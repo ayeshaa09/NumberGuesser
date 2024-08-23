@@ -1,5 +1,4 @@
 
-# Hi
 def NumberGuesser():
     max = 100000
     min = 0
