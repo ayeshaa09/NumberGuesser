@@ -1,5 +1,5 @@
-max = 100000
-min = 0
+high = 100000
+lo = 0
 def NumberGuesser():
     print('''    \nWelcome to the Number Guesser! If you
     choose to play, this game works by guessing
@@ -10,6 +10,7 @@ def NumberGuesser():
     in how many tries it took to guess your number!''')
     Type = input("\nWould you like to play or simulate? [s/p]\n")
     if Type == "p":
+        min, max = lo, high
         Number = input('''\nAlright! Think of any number between '''
         + str(min) + " - " + str(max) + ''' inclusive. 
         Type [done] when you find a number.\n''')
@@ -25,48 +26,24 @@ def NumberGuesser():
         
 
 def HigherOrLowerP():
-    HL = input("\nis your number higher, lower or equal to " + str(max//2) + " ?" + " [h/l/e]" + "\n")
-    if HL == "h":
-        min = max//2
-    elif HL == "l":
-        max = max//2
-    elif HL == "e":
-        print("\nyour number, " + str(max//2) + " was found in 1 try.\n")
-        return
-    else:
-        print("that is not an option from the above")
-        HigherOrLowerP()
+    min, max = lo, high
     counter = 1
     while True:
-        counter += 1
+        HL = input("\nis your number higher, lower or equal to " + str((max + min)//2) + " ?" + " [h/l/e]" + "\n")
         if HL == "h":
-            HL2 = input("\nis your number higher, lower or equal to " + str((max + min)//2) + " ?" + " [h/l/e]" + "\n")
-            if HL2 == "h":
-                min = (max + min)//2
-            elif HL2 == "l":
-                max = (max + min)//2
-            elif HL2 == "e": 
-                print("\nyour number, " + str((max + min)//2) + " was found in " + str(counter) + " tries.\n")
-                break
-            else: 
-                print("\nthat is not an option from the above\n")
-                continue
-            if min == max - 1:
-                min = max
+            min = (min + max)//2
         elif HL == "l":
-            HL3 = input("\nis your number higher, lower or equal to " + str((max - min)//2 + min) + " ?" + " [h/l/e]" + "\n")
-            if HL3 == "h":
-                min = (max - min)//2 + min
-            elif HL3 == "l":
-                max = (max - min)//2 + min
-            elif HL3 == "e":
-                print("\nyour number, " + str((max + min)//2) + " was found in " + str(counter) + " tries.\n")
-                break
-            else:
-                print("\nthat is not an option from the above\n")
-                continue
+            max = (min + max)//2
+        elif HL == "e":
+            print("\nyour number, " + str((max + min)//2) + " was found in " + str(counter) + " tries.\n")
+            break
+        else:
+            print("that is not an option from the above")
+            continue
+        counter += 1
 
 def HigherOrLowerS():
+    min, max = lo, high
     Number2 = input('''\nAlright! Think of any number between '''
     + str(min) + " - " + str(max) + ''' inclusive. 
     Type your number below.\n''') 
@@ -75,20 +52,17 @@ def HigherOrLowerS():
         HigherOrLowerS()
     counter = 1
     while True:
-        counter += 1
         Number2 = int(Number2)
         if Number2 > (max + min)//2:
             min = (max + min)//2
-        elif Number2 < (max - min)//2 + min:
-            max = (max - min)//2 + min
+        elif Number2 < (max + min)//2:
+            max = (max + min)//2 
         if min == max-1:
             min = max
-        elif Number2 == (max - min)//2 + min:
-            print("\nyour number, " + str((max - min)//2 + min) + " was found in " + str(counter) + " tries.\n")
-            break
         elif Number2 == (max + min)//2:
-            print("\nyour number, " + str((max + min)//2) + " was found in " + str(counter) + " tries.\n")
+            print("\nyour number, " + str(max + min)//2  + " was found in " + str(counter) + " tries.\n")
             break
+        counter += 1
 
 while True:
     NumberGuesser()
