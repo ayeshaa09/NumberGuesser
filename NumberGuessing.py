@@ -1,5 +1,10 @@
 high = 100000
 lo = 0
+
+def Error():
+    print("\nthat is not an option from above\n")
+    return
+
 def NumberGuesser():
     print('''    \nWelcome to the Number Guesser! If you
     choose to play, this game works by guessing
@@ -15,41 +20,39 @@ def NumberGuesser():
         + str(min) + " - " + str(max) + ''' inclusive. 
         Type [done] when you find a number.\n''')
         if Number == "done":
-            HigherOrLowerP()
+            Play()
         else:
-            print("that is not one of the options from above.")
-            return
+            Error()
     elif Type == "s":
-        HigherOrLowerS()
+        Simulate()
     else: 
         return
         
 
-def HigherOrLowerP():
+def Play():
     min, max = lo, high
     counter = 1
     while True:
-        HL = input("\nis your number higher, lower or equal to " + str((max + min)//2) + " ?" + " [h/l/e]" + "\n")
-        if HL == "h":
+        HLE = input("\nis your number higher, lower or equal to " + str((max + min)//2) + " ?" + " [h/l/e]" + "\n")
+        if HLE == "h":
             min = (min + max)//2
-        elif HL == "l":
+        elif HLE == "l":
             max = (min + max)//2
-        elif HL == "e":
+        elif HLE == "e":
             print("\nyour number, " + str((max + min)//2) + " was found in " + str(counter) + " tries.\n")
             break
         else:
-            print("that is not an option from the above")
-            continue
+            Error()
+            counter -= 1
         counter += 1
 
-def HigherOrLowerS():
+def Simulate():
     min, max = lo, high
-    Number2 = input('''\nAlright! Think of any number between '''
-    + str(min) + " - " + str(max) + ''' inclusive. 
-    Type your number below.\n''') 
+    Number2 = input("\nAlright! Think of any number between"
+    + str(min) + " - " + str(max) + " inclusive. Type your number below.\n") 
     if int(Number2) > max or int(Number2) < min:
-        print("\nthat is not an option from the above\n")
-        HigherOrLowerS()
+        Error()
+        Simulate()
     counter = 1
     while True:
         Number2 = int(Number2)
@@ -57,11 +60,9 @@ def HigherOrLowerS():
             min = (max + min)//2
         elif Number2 < (max + min)//2:
             max = (max + min)//2 
-        if min == max-1:
-            min = max
         elif Number2 == (max + min)//2:
-            print("\nyour number, " + str(max + min)//2  + " was found in " + str(counter) + " tries.\n")
-            break
+            print("\nyour number, " + str((max + min)//2)  + ", was found in " + str(counter) + " tries.\n")
+            NumberGuesser()
         counter += 1
 
 while True:
